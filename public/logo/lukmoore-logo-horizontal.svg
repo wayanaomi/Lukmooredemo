@@ -1,0 +1,24 @@
+<svg width="640" height="160" viewBox="0 0 640 160" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Lukmoore logo">
+  <defs>
+    <linearGradient id="lukmooreBagGradientH" x1="20" y1="20" x2="180" y2="190" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#E4122A" />
+      <stop offset="0.55" stop-color="#F03E1F" />
+      <stop offset="1" stop-color="#FF7A1A" />
+    </linearGradient>
+    <linearGradient id="lukmooreTextGradientH" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#E4122A" />
+      <stop offset="1" stop-color="#FF7A1A" />
+    </linearGradient>
+  </defs>
+  <g transform="translate(0,-20)">
+    <path d="M78 66C78 40.5949 91.4315 24 108 24C124.569 24 138 40.5949 138 66"
+          stroke="url(#lukmooreBagGradientH)" stroke-width="13" stroke-linecap="round" fill="none" />
+    <rect x="32" y="58" width="140" height="122" rx="24" fill="url(#lukmooreBagGradientH)" />
+    <text x="103" y="150" text-anchor="middle" font-family="Poppins, Arial, Helvetica, sans-serif"
+          font-weight="800" font-size="92" fill="#FFFFFF">L</text>
+    <path d="M96 152C112 166 132 170 152 158" stroke="#FFFFFF" stroke-width="8"
+          stroke-linecap="round" fill="none" opacity="0.95" />
+  </g>
+  <text x="205" y="98" font-family="Poppins, Arial, Helvetica, sans-serif" font-weight="800"
+        font-size="58" letter-spacing="1" fill="url(#lukmooreTextGradientH)">LUKMOORE</text>
+</svg>

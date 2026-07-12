@@ -1,0 +1,110 @@
+import { picsumUrl } from "@/lib/utils/format";
+import type { Category } from "@/types/marketplace";
+
+export const categories: Category[] = [
+  {
+    id: "cat-electronics",
+    name: "Electronics",
+    slug: "electronics",
+    icon: "Smartphone",
+    image: picsumUrl("lukmoore-electronics", 640, 480),
+    productCount: 128,
+    featured: true,
+  },
+  {
+    id: "cat-fashion",
+    name: "Fashion",
+    slug: "fashion",
+    icon: "Shirt",
+    image: picsumUrl("lukmoore-fashion", 640, 480),
+    productCount: 214,
+    featured: true,
+  },
+  {
+    id: "cat-beauty",
+    name: "Beauty & Personal Care",
+    slug: "beauty-personal-care",
+    icon: "Sparkles",
+    image: picsumUrl("lukmoore-beauty", 640, 480),
+    productCount: 96,
+    featured: true,
+  },
+  {
+    id: "cat-home",
+    name: "Home & Living",
+    slug: "home-living",
+    icon: "Sofa",
+    image: picsumUrl("lukmoore-home", 640, 480),
+    productCount: 152,
+    featured: true,
+  },
+  {
+    id: "cat-groceries",
+    name: "Groceries",
+    slug: "groceries",
+    icon: "ShoppingBasket",
+    image: picsumUrl("lukmoore-groceries", 640, 480),
+    productCount: 84,
+  },
+  {
+    id: "cat-sports",
+    name: "Sports & Outdoors",
+    slug: "sports-outdoors",
+    icon: "Dumbbell",
+    image: picsumUrl("lukmoore-sports", 640, 480),
+    productCount: 63,
+  },
+  {
+    id: "cat-toys",
+    name: "Toys & Kids",
+    slug: "toys-kids",
+    icon: "Baby",
+    image: picsumUrl("lukmoore-toys", 640, 480),
+    productCount: 71,
+  },
+  {
+    id: "cat-books",
+    name: "Books & Stationery",
+    slug: "books-stationery",
+    icon: "BookOpen",
+    image: picsumUrl("lukmoore-books", 640, 480),
+    productCount: 58,
+  },
+  {
+    id: "cat-automotive",
+    name: "Automotive",
+    slug: "automotive",
+    icon: "Car",
+    image: picsumUrl("lukmoore-automotive", 640, 480),
+    productCount: 47,
+  },
+  {
+    id: "cat-jewelry",
+    name: "Jewelry & Accessories",
+    slug: "jewelry-accessories",
+    icon: "Gem",
+    image: picsumUrl("lukmoore-jewelry", 640, 480),
+    productCount: 89,
+    featured: true,
+  },
+  {
+    id: "cat-pets",
+    name: "Pet Supplies",
+    slug: "pet-supplies",
+    icon: "PawPrint",
+    image: picsumUrl("lukmoore-pets", 640, 480),
+    productCount: 39,
+  },
+  {
+    id: "cat-furniture",
+    name: "Furniture",
+    slug: "furniture",
+    icon: "Armchair",
+    image: picsumUrl("lukmoore-furniture", 640, 480),
+    productCount: 54,
+  },
+];
+
+export function getCategoryBySlug(slug: string) {
+  return categories.find((category) => category.slug === slug);
+}

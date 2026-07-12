@@ -1,0 +1,17 @@
+{
+  "name": "Lukmoore — Shop More. Live More.",
+  "short_name": "Lukmoore",
+  "description": "Lukmoore is a premium multi-vendor online marketplace.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#e4122a",
+  "icons": [
+    {
+      "src": "/logo/lukmoore-mark.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
