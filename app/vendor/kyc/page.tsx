@@ -70,7 +70,7 @@ export default function VendorKycPage() {
         <div className="mt-6 flex flex-col gap-4">
           <div className="flex flex-col gap-1.5">
             <Label>Document type</Label>
-            <Select value={docType} onValueChange={setDocType}>
+            <Select value={docType} onValueChange={(value) => setDocType(value ?? "national-id")}>
               <SelectTrigger className="w-full sm:w-64">
                 <SelectValue />
               </SelectTrigger>

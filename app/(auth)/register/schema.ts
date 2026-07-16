@@ -7,8 +7,8 @@ export const registerSchema = z
     password: z.string().min(8, "Password must be at least 8 characters"),
     confirmPassword: z.string().min(8, "Confirm your password"),
     role: z.enum(["CUSTOMER", "VENDOR"]).default("CUSTOMER"),
-    acceptTerms: z.literal(true, {
-      error: "You must accept the Terms of Service",
+    acceptTerms: z.boolean().refine((value) => value, {
+      message: "You must accept the Terms of Service",
     }),
   })
   .refine((data) => data.password === data.confirmPassword, {

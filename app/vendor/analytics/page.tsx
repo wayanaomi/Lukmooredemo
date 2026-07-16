@@ -44,7 +44,7 @@ export default function VendorAnalyticsPage() {
       <div className="rounded-2xl border bg-card p-6">
         <h2 className="font-heading font-semibold">Orders by Month</h2>
         <div className="h-64 w-full">
-          <ResponsiveContainer width="100%" height="100%">
+          <ResponsiveContainer width="100%" height={350}>
             <BarChart data={revenueTrend} margin={{ top: 10, right: 10, left: -10, bottom: 0 }}>
               <CartesianGrid vertical={false} stroke="var(--border)" />
               <XAxis dataKey="month" tickLine={false} axisLine={false} fontSize={12} />

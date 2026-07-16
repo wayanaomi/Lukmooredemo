@@ -45,7 +45,8 @@ const productSchema = z.object({
   price: z.coerce.number().min(0.01, "Enter a valid price"),
   stock: z.coerce.number().min(0, "Enter valid stock"),
 });
-type ProductInput = z.infer<typeof productSchema>;
+type ProductFormInput = z.input<typeof productSchema>;
+type ProductFormOutput = z.output<typeof productSchema>;
 
 export default function VendorProductsPage() {
   const [products, setProducts] = useState<Product[]>(initialProducts);
@@ -53,7 +54,7 @@ export default function VendorProductsPage() {
   const [editing, setEditing] = useState<Product | null>(null);
   const [submitting, setSubmitting] = useState(false);
 
-  const form = useForm<ProductInput>({
+  const form = useForm<ProductFormInput, unknown, ProductFormOutput>({
     resolver: zodResolver(productSchema),
     defaultValues: { title: "", price: 0, stock: 0 },
   });
@@ -75,7 +76,7 @@ export default function VendorProductsPage() {
     toast.success("Product removed");
   }
 
-  async function onSubmit(values: ProductInput) {
+  async function onSubmit(values: ProductFormOutput) {
     setSubmitting(true);
     await new Promise((resolve) => setTimeout(resolve, 500));
     if (editing) {
@@ -138,9 +139,17 @@ export default function VendorProductsPage() {
                     name="price"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>Price ($)</FormLabel>
+                        <FormLabel>Price (₦)</FormLabel>
                         <FormControl>
-                          <Input type="number" step="0.01" {...field} />
+                          <Input
+                            type="number"
+                            step="0.01"
+                            name={field.name}
+                            ref={field.ref}
+                            onBlur={field.onBlur}
+                            value={typeof field.value === "number" ? field.value : ""}
+                            onChange={(event) => field.onChange(event.target.value)}
+                          />
                         </FormControl>
                         <FormMessage />
                       </FormItem>
@@ -153,7 +162,14 @@ export default function VendorProductsPage() {
                       <FormItem>
                         <FormLabel>Stock</FormLabel>
                         <FormControl>
-                          <Input type="number" {...field} />
+                          <Input
+                            type="number"
+                            name={field.name}
+                            ref={field.ref}
+                            onBlur={field.onBlur}
+                            value={typeof field.value === "number" ? field.value : ""}
+                            onChange={(event) => field.onChange(event.target.value)}
+                          />
                         </FormControl>
                         <FormMessage />
                       </FormItem>

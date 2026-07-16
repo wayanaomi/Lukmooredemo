@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { z } from "zod";
 import { Loader2 } from "lucide-react";
 import { toast } from "sonner";
 
@@ -23,11 +24,13 @@ import {
 import { registerSchema, type RegisterInput } from "@/app/(auth)/register/schema";
 import { registerUser } from "@/app/(auth)/register/actions";
 
+type RegisterFormInput = z.input<typeof registerSchema>;
+
 export function RegisterForm() {
   const router = useRouter();
   const [submitting, setSubmitting] = useState(false);
 
-  const form = useForm<RegisterInput>({
+  const form = useForm<RegisterFormInput, unknown, RegisterInput>({
     resolver: zodResolver(registerSchema),
     defaultValues: {
       name: "",
@@ -35,7 +38,7 @@ export function RegisterForm() {
       password: "",
       confirmPassword: "",
       role: "CUSTOMER",
-      acceptTerms: false as unknown as true,
+      acceptTerms: false,
     },
   });
 
@@ -119,7 +122,7 @@ export function RegisterForm() {
               <FormLabel>I want to</FormLabel>
               <FormControl>
                 <RadioGroup
-                  value={field.value}
+                  value={field.value ?? "CUSTOMER"}
                   onValueChange={field.onChange}
                   className="grid grid-cols-2 gap-3"
                 >

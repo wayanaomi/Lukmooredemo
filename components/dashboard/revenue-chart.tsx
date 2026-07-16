@@ -30,10 +30,13 @@ export function RevenueChart() {
             tickLine={false}
             axisLine={false}
             fontSize={12}
-            tickFormatter={(value) => `$${value / 1000}k`}
+            tickFormatter={(value) => `₦${value / 1000}k`}
           />
           <Tooltip
-            formatter={(value: number) => formatCurrency(value)}
+            formatter={(value) => {
+              const numeric = typeof value === "number" ? value : Number(value ?? 0);
+              return formatCurrency(Number.isNaN(numeric) ? 0 : numeric);
+            }}
             contentStyle={{ borderRadius: 12, border: "1px solid var(--border)" }}
           />
           <Area

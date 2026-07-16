@@ -27,7 +27,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { ThemeToggle } from "@/components/layout/theme-toggle";
 import { CartSheet } from "@/components/cart/cart-sheet";
-import { mainNav, siteConfig } from "@/config/site";
+import { mainNav } from "@/config/site";
 import { useAppSelector } from "@/store/hooks";
 import { cn } from "@/lib/utils";
 
@@ -189,17 +189,21 @@ function AccountMenu() {
           </Avatar>
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent align="end" className="w-56">
+      <DropdownMenuContent className="w-56">
         <div className="px-2 py-1.5">
           <p className="truncate text-sm font-medium">{session.user.name}</p>
           <p className="truncate text-xs text-muted-foreground">{session.user.email}</p>
         </div>
         <DropdownMenuSeparator />
-        <DropdownMenuItem asChild>
-          <Link href={ROLE_HOME[role] ?? "/dashboard"}>Dashboard</Link>
+        <DropdownMenuItem>
+          <Link href={ROLE_HOME[role] ?? "/dashboard"} className="w-full">
+            Dashboard
+          </Link>
         </DropdownMenuItem>
-        <DropdownMenuItem asChild>
-          <Link href="/dashboard/settings">Account settings</Link>
+        <DropdownMenuItem>
+          <Link href="/dashboard/settings" className="w-full">
+            Account settings
+          </Link>
         </DropdownMenuItem>
         <DropdownMenuSeparator />
         <DropdownMenuItem onClick={() => signOut({ callbackUrl: "/" })}>Sign out</DropdownMenuItem>

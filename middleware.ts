@@ -1,5 +1,5 @@
 import NextAuth from "next-auth";
-import { NextResponse, type NextRequest } from "next/server";
+import { NextResponse } from "next/server";
 
 import { authConfig } from "@/auth.config";
 
@@ -22,7 +22,7 @@ const ROLE_HOME: Record<string, string> = {
   SUPER_ADMIN: "/admin",
 };
 
-export default auth((request: NextRequest & { auth?: { user?: { role?: string } } }) => {
+export default auth((request) => {
   const { pathname } = request.nextUrl;
 
   const isMaintenanceMode = process.env.MAINTENANCE_MODE === "true";
@@ -32,8 +32,7 @@ export default auth((request: NextRequest & { auth?: { user?: { role?: string } 
     return NextResponse.rewrite(new URL("/maintenance", request.url));
   }
 
-  const session = request.auth;
-  const role = session?.user?.role;
+  const role = request.auth?.user?.role;
   const isAuthPage = AUTH_PAGES.some((path) => pathname.startsWith(path));
 
   if (isAuthPage && role) {

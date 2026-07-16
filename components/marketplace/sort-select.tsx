@@ -24,7 +24,8 @@ export function SortSelect() {
   const searchParams = useSearchParams();
   const current = searchParams.get("sort") ?? "relevance";
 
-  function handleChange(value: string) {
+  function handleChange(value: string | null) {
+    if (!value) return;
     const params = new URLSearchParams(searchParams.toString());
     if (value === "relevance") {
       params.delete("sort");

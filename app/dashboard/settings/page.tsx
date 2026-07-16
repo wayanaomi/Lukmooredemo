@@ -22,7 +22,7 @@ export default function SettingsPage() {
     smsAlerts: true,
   });
   const [language, setLanguage] = useState("en");
-  const [currency, setCurrency] = useState("NGN");
+  const [currency, setCurrency] = useState("USD");
 
   function updatePreference(key: keyof typeof preferences, value: boolean) {
     setPreferences((prev) => ({ ...prev, [key]: value }));
@@ -67,7 +67,14 @@ export default function SettingsPage() {
         <div className="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-2">
           <div className="flex flex-col gap-1.5">
             <Label>Language</Label>
-            <Select value={language} onValueChange={setLanguage}>
+            <Select
+  value={language}
+  onValueChange={(value) => {
+    if (value !== null) {
+      setLanguage(value);
+    }
+  }}
+>
               <SelectTrigger className="w-full">
                 <SelectValue />
               </SelectTrigger>
@@ -80,13 +87,20 @@ export default function SettingsPage() {
           </div>
           <div className="flex flex-col gap-1.5">
             <Label>Currency</Label>
-            <Select value={currency} onValueChange={setCurrency}>
+            <Select
+  value={currency}
+  onValueChange={(value) => {
+    if (value !== null) {
+      setCurrency(value);
+    }
+  }}
+>
               <SelectTrigger className="w-full">
                 <SelectValue />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="NGN">NGN (₦)</SelectItem>
                 <SelectItem value="USD">USD ($)</SelectItem>
+                <SelectItem value="NGN">NGN (₦)</SelectItem>
                 <SelectItem value="GHS">GHS (₵)</SelectItem>
                 <SelectItem value="KES">KES (KSh)</SelectItem>
               </SelectContent>

@@ -33,7 +33,7 @@ export default function AboutPage() {
         </h1>
         <p className="mt-4 text-muted-foreground">
           Lukmoore was founded in 2020 with a simple belief: shopping online should feel as good
-          as the products you're buying. Today we connect over 4,200 verified vendors with more
+          as the products you&apos;re buying. Today we connect over 4,200 verified vendors with more
           than 1.2 million shoppers across Africa and beyond.
         </p>
       </section>
@@ -75,7 +75,7 @@ export default function AboutPage() {
           ))}
         </div>
         <p className="mx-auto mt-10 max-w-xl text-center text-sm text-muted-foreground">
-          We're always looking for talented people to join our mission. Reach out at{" "}
+          We&apos;re always looking for talented people to join our mission. Reach out at{" "}
           <a href="mailto:careers@lukmoore.com" className="text-brand-red underline">
             careers@lukmoore.com
           </a>

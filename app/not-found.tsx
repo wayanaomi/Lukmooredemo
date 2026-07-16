@@ -9,8 +9,8 @@ export default function NotFound() {
       <p className="text-gradient-brand font-heading text-7xl font-extrabold sm:text-8xl">404</p>
       <h1 className="font-heading text-2xl font-bold sm:text-3xl">Page not found</h1>
       <p className="max-w-md text-muted-foreground">
-        The page you're looking for doesn't exist or may have been moved. Let's get you back on
-        track.
+        The page you&apos;re looking for doesn&apos;t exist or may have been moved. Let&apos;s get you back on
+track.
       </p>
       <div className="flex flex-wrap items-center justify-center gap-3">
         <Button asChild className="bg-gradient-brand">

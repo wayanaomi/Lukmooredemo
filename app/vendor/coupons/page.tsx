@@ -52,14 +52,15 @@ const couponSchema = z.object({
   value: z.coerce.number().min(1, "Enter a value"),
   usageLimit: z.coerce.number().min(1, "Enter a usage limit"),
 });
-type CouponInput = z.infer<typeof couponSchema>;
+type CouponFormInput = z.input<typeof couponSchema>;
+type CouponFormOutput = z.output<typeof couponSchema>;
 
 export default function VendorCouponsPage() {
   const [coupons, setCoupons] = useState<VendorCoupon[]>(initialCoupons);
   const [dialogOpen, setDialogOpen] = useState(false);
   const [submitting, setSubmitting] = useState(false);
 
-  const form = useForm<CouponInput>({
+  const form = useForm<CouponFormInput, unknown, CouponFormOutput>({
     resolver: zodResolver(couponSchema),
     defaultValues: { code: "", description: "", type: "percentage", value: 10, usageLimit: 100 },
   });
@@ -73,7 +74,7 @@ export default function VendorCouponsPage() {
     setCoupons((prev) => prev.map((c) => (c.id === id ? { ...c, isActive: !c.isActive } : c)));
   }
 
-  async function onSubmit(values: CouponInput) {
+  async function onSubmit(values: CouponFormOutput) {
     setSubmitting(true);
     await new Promise((resolve) => setTimeout(resolve, 500));
     const coupon: VendorCoupon = {
@@ -169,7 +170,14 @@ export default function VendorCouponsPage() {
                       <FormItem>
                         <FormLabel>Value</FormLabel>
                         <FormControl>
-                          <Input type="number" {...field} />
+                            <Input
+                              type="number"
+                              name={field.name}
+                              ref={field.ref}
+                              onBlur={field.onBlur}
+                              value={typeof field.value === "number" ? field.value : ""}
+                              onChange={(event) => field.onChange(event.target.value)}
+                            />
                         </FormControl>
                         <FormMessage />
                       </FormItem>
@@ -183,7 +191,14 @@ export default function VendorCouponsPage() {
                     <FormItem>
                       <FormLabel>Usage limit</FormLabel>
                       <FormControl>
-                        <Input type="number" {...field} />
+                          <Input
+                            type="number"
+                            name={field.name}
+                            ref={field.ref}
+                            onBlur={field.onBlur}
+                            value={typeof field.value === "number" ? field.value : ""}
+                            onChange={(event) => field.onChange(event.target.value)}
+                          />
                       </FormControl>
                       <FormMessage />
                     </FormItem>

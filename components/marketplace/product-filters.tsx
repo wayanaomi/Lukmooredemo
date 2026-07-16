@@ -80,7 +80,7 @@ export function ProductFilters() {
           step={10}
           value={priceRange}
           onValueChange={(value) => setPriceRange(value as [number, number])}
-          onValueCommit={applyPriceRange}
+          onValueCommitted={applyPriceRange}
         />
         <div className="mt-2 flex justify-between text-xs text-muted-foreground">
           <span>{formatCurrency(priceRange[0])}</span>

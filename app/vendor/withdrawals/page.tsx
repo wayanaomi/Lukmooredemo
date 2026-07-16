@@ -50,7 +50,8 @@ const withdrawSchema = z.object({
   amount: z.coerce.number().min(50000, "Minimum withdrawal is ₦50,000"),
   method: z.string().min(1, "Select a withdrawal method"),
 });
-type WithdrawInput = z.infer<typeof withdrawSchema>;
+type WithdrawFormInput = z.input<typeof withdrawSchema>;
+type WithdrawFormOutput = z.output<typeof withdrawSchema>;
 
 const statusStyles: Record<WithdrawalRequest["status"], string> = {
   completed: "bg-success/10 text-success border-success/20",
@@ -64,12 +65,12 @@ export default function VendorWithdrawalsPage() {
   const [dialogOpen, setDialogOpen] = useState(false);
   const [submitting, setSubmitting] = useState(false);
 
-  const form = useForm<WithdrawInput>({
+  const form = useForm<WithdrawFormInput, unknown, WithdrawFormOutput>({
     resolver: zodResolver(withdrawSchema),
     defaultValues: { amount: 0, method: "Bank transfer — GTBank ****4521" },
   });
 
-  async function onSubmit(values: WithdrawInput) {
+  async function onSubmit(values: WithdrawFormOutput) {
     setSubmitting(true);
     await new Promise((resolve) => setTimeout(resolve, 500));
     const request: WithdrawalRequest = {
@@ -111,9 +112,17 @@ export default function VendorWithdrawalsPage() {
                   name="amount"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Amount ($)</FormLabel>
+                      <FormLabel>Amount (₦)</FormLabel>
                       <FormControl>
-                        <Input type="number" step="0.01" {...field} />
+                        <Input
+                          type="number"
+                          step="0.01"
+                          name={field.name}
+                          ref={field.ref}
+                          onBlur={field.onBlur}
+                          value={typeof field.value === "number" ? field.value : ""}
+                          onChange={(event) => field.onChange(event.target.value)}
+                        />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
