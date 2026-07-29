@@ -46,15 +46,12 @@ export async function registerUser(input: RegisterInput): Promise<RegisterResult
       success: true,
       message: "Account created! You can now sign in.",
     };
-  } catch {
-    // No database configured yet in this environment — the UI still confirms
-    // registration so the flow can be demoed end-to-end. See docs/ASSUMPTIONS.md.
-    // Use the demo accounts (customer@lukmoore.com / vendor@lukmoore.com /
-    // admin@lukmoore.com, password: password123) to sign in and explore.
+    } catch (error) {
+    console.error(error);
+
     return {
-      success: true,
-      message:
-        "Account created! Since no database is connected in this environment, sign in with a demo account (see the login page) to explore the dashboards.",
+      success: false,
+      message: "Something went wrong while creating your account.",
     };
   }
 }
