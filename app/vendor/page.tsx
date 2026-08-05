@@ -1,3 +1,6 @@
+import { auth } from "@/auth";
+import { prisma } from "@/lib/prisma";
+import { redirect } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
 import { DollarSign, Package, ShoppingBag, Star } from "lucide-react";
@@ -32,14 +35,56 @@ const statusStyles: Record<string, string> = {
   cancelled: "bg-destructive/10 text-destructive border-destructive/20",
 };
 
-export default function VendorOverviewPage() {
+export default async function VendorOverviewPage() {
+
+  const session = await auth();
+
+  console.log("SESSION:", session);
+if (!session?.user?.id) {
+  redirect("/login");
+}
+const store = await prisma.store.findUnique({
+  where: {
+    ownerId: session.user.id,
+  },
+  include: {
+    owner: true,
+  },
+});
+
+console.log("STORE:", store);
+
+if (!store) {
+  return (
+    <div className="rounded-xl border p-8">
+      <h2 className="text-xl font-bold">No Store Found</h2>
+
+      <p className="mt-2 text-muted-foreground">
+        Your vendor account does not have a store yet.
+      </p>
+    </div>
+  );
+}
+
   const recentOrders = vendorOrders.slice(0, 6);
 
   return (
     <div className="flex flex-col gap-6">
       <div>
-        <h1 className="font-heading text-2xl font-bold">Welcome back, {currentVendor.name}</h1>
-        <p className="text-sm text-muted-foreground">Here&apos;s how your store is performing.</p>
+        <h1 className="font-heading text-2xl font-bold">
+          Welcome back, {store.owner.name}
+      </h1>
+        <p className="text-sm text-muted-foreground">
+          Store: {store.name}
+        </p>
+
+        <p className="text-sm text-muted-foreground">
+          Owner Email: {store.owner.email}
+        </p>
+
+        <p className="text-sm text-muted-foreground">
+          Store Status: {store.status}
+        </p>
       </div>
 
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
